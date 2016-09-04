@@ -11,15 +11,21 @@ rules = [
   {start:"xUUy", end:"xy"},
 ]
 
+
 levels = [{start:"MUI", end:"MUIU"},
   {start:"MU", end:"MUU"},
   {start:"MUIIIU", end:"MUUU"},
   {start:"MUU", end:"M"},
-  {start:"MIII", end:"MIUIIU"},
-  {start:"MUI", end:"MUIUIIUIIUIIUIIUIIUIIUIIUIU"},
-  {start:"MI", end:"MIU"},
+  {start:"MI", end:"MUIIU"},
+  {start:"MI", end:"MIIUUU"},
+  {start:"MI", end:"MIIUU"},
+  {start:"MI", end:"MUUIU"},
+  {start:"MIIUIIIUIIU", end:"MI"},
+  {start:"MIIUU", end:"MI"},
+  {start:"MIIUUUIIU", end:"MI"},
   {start:"MI", end:"MU"},
 ]
+
 
 currentLevelIdx = 0;
 
