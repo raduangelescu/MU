@@ -3,7 +3,12 @@ static_text_div  ="nochange"
 draw_text_canvas = "draw"
 button_area      = "buttons"
 
+//we figure out the difference betweeen static text (one that matches letter by letter) and variable text
+// if a letter appears in a rule it can be a variable that holds a string or member of the alphabet
 alphabet =['M','I','U']
+// we have an array of rules that we use. As you can see we added this layer of indirection
+//so we could have any number of rules of the form
+// variable-Static-variable variable-Static Static-variable
 rules = [
   {start:"xI", end:"xIU"},
   {start:"Mx", end:"Mxx"},
@@ -36,6 +41,10 @@ selectedEnd     = 0
 
 animation_units = 0
 
+// We do some analysis on the rules for easier computations. The most important part is creating a patch
+// between start and end rules so we now what is added in general and what is removed and the same.
+// We will use this information to play animations on letters
+
 function PrepareRules()
 {
     var dmp = new diff_match_patch();
@@ -49,14 +58,19 @@ function PrepareRules()
     }
 
 }
-
+//This is called at the begining of the program
 PrepareRules()
-
+//Helper function that checks if a character is inside the alphabet or outside it
 function IsInAlphabet(c)
 {
   return alphabet.indexOf(c) != -1;
 }
 
+//This function is actually used to hold the variables so they can be matched between start and end rules.
+//Notice that this can be further developed to solve even bigger classes of problems.
+//The biggest improvement that we can make, to unlock some more possibilities is making this recursive for
+// variable matching (similar to beautifull code regex matching). I will leave this as an exercise for the
+// reader (the reader can then understand why I did not include this :) )
 
 function ApplyStartRule(string, ruleObject)
 {
@@ -118,6 +132,9 @@ function AddTextSpan(cname)
   return element
 }
 
+//This function walks the end rule and matches the variables with what we found in the start rule.
+
+//We also play animations of added and removed string parts
 function ApplyEndRule(ruleObject)
 {
   split = ruleObject.split
